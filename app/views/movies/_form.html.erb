@@ -1,0 +1,49 @@
+<%= form_for @movie, html: { multipart: true } do |f| %>
+<%= cloudinary_js_config %> 
+  <% if @movie.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+
+      <ul>
+      <% @movie.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :Description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :Movie_length %><br>
+    <%= f.text_field :movie_length %>
+  </div>
+  <div class="field">
+    <%= f.label :Director %><br>
+    <%= f.text_field :director %>
+  </div>
+  <div class="field">
+    <%= f.label :Release_year %><br>
+    <%= f.text_field :release_year %>
+  </div>
+  <div class="field">
+    <%= f.label :Rating %><br>
+    <%= f.text_field :rating %>
+  </div>
+  <div class="Image">
+    <%= f.label :Image %><br>
+    <%= form_tag(some_path :method => :post) do  %>
+    <%= cl_image_upload_tag(:image_id, :crop => :limit, :width => 1000, :height => 1000, :html => {:class => "image_upload"}) %>
+  <% end %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
